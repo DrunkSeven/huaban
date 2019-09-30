@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>画板</title>
+</head>
+
+<body>
+    <img id="bg">
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <div class="util-box">
+        <button class="util">铅笔</button>
+        <button class="util">直线</button>
+        <button class="util">圈圈</button>
+        <button class="util">矩形</button>
+        <button class="util">橡皮</button>
+        <button class="util">撤销</button>
+    </div>
+    <div class="control-box">
+        <button>上一张</button>
+        <button>重置</button>
+        <button>下一章</button>
+    </div>
+</body>
+<style>
+    body {
+        margin: 0;
+        background: #ccc;
+        -moz-user-select: none;
+        /*火狐*/
+        -webkit-user-select: none;
+        /*webkit浏览器*/
+        -ms-user-select: none;
+        /*IE10*/
+        -khtml-user-select: none;
+        /*早期浏览器*/
+        user-select: none;
+    }
+
+    .util-box {
+        width: 640px;
+        border-radius: 3px;
+        border: 1px solid #333;
+        display: flex;
+    }
+
+    .util {
+        width: 60px;
+        height: 30px;
+        cursor: pointer;
+        transition: all .2s;
+    }
+
+    .util:hover {
+        transform: scale(1.1)
+    }
+
+    #bg {
+        width: 640px;
+        height: 480px;
+    }
+
+    #canvas {
+        border: 1px solid;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+</style>
+
+</html>
