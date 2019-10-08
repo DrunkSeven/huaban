@@ -12,23 +12,44 @@
     <img id="bg">
     <canvas id="canvas" width="640" height="480"></canvas>
     <div class="util-box">
-        <button class="util">铅笔</button>
-        <button class="util">直线</button>
-        <button class="util">圈圈</button>
-        <button class="util">矩形</button>
-        <button class="util">橡皮</button>
-        <button class="util">撤销</button>
+        <span class="label">画笔工具:</span>
+        <button class="util" data-type="pen">铅笔</button>
+        <button class="util" data-type="line">直线</button>
+        <button class="util" data-type="circle">圈圈</button>
+        <button class="util" data-type="rect">矩形</button>
+        <button class="util" data-type="eraser">橡皮</button>
+        <div class="poly-box">
+            <button class="util" data-type="poly">正多边形</button>
+            <input type="number" id="polyLine" value="3" max="9" min="3" maxlength="2">
+        </div>
+        <button class="util" data-type="cancel">撤销</button>
     </div>
-    <div class="control-box">
+    <div class="color-box">
+        <div class="select-color-box">
+            <span class="label">当前颜色:</span>
+            <span id="selectColor" style="background: #000"></span>
+        </div>
+        <span class="color" data-color="#000000"></span>
+        <span class="color" data-color="#FFFFFF"></span>
+        <span class="color" data-color="#FF0000"></span>
+        <span class="color" data-color="#0000FF"></span>
+        <span class="color" data-color="#FFFF00"></span>
+        <span class="color" data-color="#9AFF02"></span>
+    </div>
+    <div class="line-width-box">
+        <span class="label">线条粗细:</span>
+        <input id="lineWidth" type='range' min="1" value="1" />
+        <span id="lineWidthValue">1</span>
+    </div>
+    <!-- <div class="control-box">
         <button>上一张</button>
         <button>重置</button>
         <button>下一章</button>
-    </div>
+    </div> -->
 </body>
 <style>
     body {
         margin: 0;
-        background: #ccc;
         -moz-user-select: none;
         /*火狐*/
         -webkit-user-select: none;
@@ -40,22 +61,71 @@
         user-select: none;
     }
 
+    .line-width-box,
+    .color-box,
     .util-box {
+        padding: 5px 10px;
         width: 640px;
-        border-radius: 3px;
-        border: 1px solid #333;
         display: flex;
+        align-items: center;
+        /* justify-content: center; */
+    }
+
+
+    .select-color-box {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        justify-content: space-between;
+    }
+
+    #selectColor,
+    .color-box .color {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #000;
+        cursor: pointer;
+        margin-right: 3px;
+    }
+
+    .label {
+        margin-right: 10px;
     }
 
     .util {
-        width: 60px;
+        background: #fff;
+        min-width: 60px;
         height: 30px;
         cursor: pointer;
         transition: all .2s;
+        border: 1px solid #ccc;
+        margin-right: 2px;
     }
 
     .util:hover {
+        border: 1px solid #409eff;
+        color: #409eff;
         transform: scale(1.1)
+    }
+
+    .poly-box {
+        display: flex;
+        align-items: center;
+        margin-right: 2px;
+    }
+
+    .poly-box .util {
+        margin-right: 0;
+    }
+
+    #polyLine {
+        width: 30px;
+        border: 1px solid #ccc;
+        background: rgba(255, 255, 255, .5);
+        padding-left: 5px;
+        height: 26px;
+        border-left: none;
     }
 
     #bg {

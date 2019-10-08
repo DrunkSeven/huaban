@@ -1,66 +1,78 @@
 // import People from "./model/People"
 import Draw from "./model/Draw"
-var pageIndex=0;
+var pageIndex = 0;
 function main(): void {
     setPage(0)
+    let colorDom: HTMLCollectionOf<Element> = document.getElementsByClassName("color");
+    let selectColorDom: HTMLSpanElement = <HTMLSpanElement>document.getElementById("selectColor");
+    let lineWidth: HTMLInputElement = <HTMLInputElement>document.getElementById("lineWidth");
+    let polyLineDom: HTMLInputElement = <HTMLInputElement>document.getElementById("polyLine");
+    let util: HTMLDivElement = <HTMLDivElement>document.querySelector(".util-box");
     let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("canvas");
     let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
-    let type: string = "pen";
     let draw = new Draw(ctx)
-    let util: Array<Element> = <any>document.getElementsByClassName("util");
-    let arr: Array<ImageData> = []
-    util[0].addEventListener("click", (e) => {
-        type = "pen"
-        canvas.style.cursor = "url('./../static/img/qb.png'), pointer"
+    let type: string = "pen";
+    let arr: Array<ImageData> = [];
+    let polyLine: number = parseInt(polyLineDom.value);
+    Array.from(colorDom).forEach(e => {
+        let d = e as HTMLElement
+        d.style.background = d.dataset.color;
+        d.addEventListener("click", e => {
+            draw.color = d.dataset.color;
+            selectColorDom.style.background = draw.color
+        })
     })
-    util[1].addEventListener("click", (e) => {
-        type = "line"
-        canvas.style.cursor = "crosshair"
+    lineWidth.addEventListener("change", e => {
+        const target = e.target as HTMLInputElement;
+        draw.lineWidth = parseInt(target.value)
+        document.getElementById("lineWidthValue").innerText = target.value
     })
-    util[2].addEventListener("click", (e) => {
-        type = "circle"
-        canvas.style.cursor = "crosshair"
+    polyLineDom.addEventListener("change", (e) => {
+        const target = e.target as HTMLInputElement;
+        let num = parseInt(target.value)
+        type = "poly"
+        if (num > 2 && num < 10) {
+            polyLine = num
+        } else {
+            target.value = polyLine.toString()
+        }
+
     })
-    util[3].addEventListener("click", (e) => {
-        type = "rect"
-        canvas.style.cursor = "crosshair"
-    })
-    util[4].addEventListener("click", (e) => {
-        type = "eraser"
-        canvas.style.cursor = "pointer"
-    })
-    util[5].addEventListener("click", (e) => {
-        arr.pop()
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (arr.length > 0) {
-            ctx.putImageData(arr[arr.length - 1], 0, 0, 0, 0, canvas.width, canvas.height);
+    util.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        if (!target.dataset.type) {
+            return
+        }
+        type = target.dataset.type;
+        if (type == 'cancel') {
+            arr.pop()
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (arr.length > 0) {
+                ctx.putImageData(arr[arr.length - 1], 0, 0, 0, 0, canvas.width, canvas.height);
+            }
         }
     })
-    // window.onkeydown = (e) => {
-    //     switch (e.keyCode) {
-    //         case 87: people.walk("back"); break;
-    //         case 83: people.walk("forward"); break;
-    //         case 65: people.walk("left"); break;
-    //         case 68: people.walk("right"); break;
-    //     }
-    // }
     canvas.onmousedown = (e) => {
         let x: number = e.offsetX;
         let y: number = e.offsetY;
-        if(type=="pen"){
+        if (type == "pen") {
             ctx.beginPath();
             ctx.moveTo(x, y);
         }
         canvas.onmousemove = (e) => {
             let x1: number = e.offsetX;
             let y1: number = e.offsetY;
-            if(type!="eraser"){
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-                if(arr.length!=0){
-                    ctx.putImageData(arr[arr.length-1],0,0,0,0,canvas.width,canvas.height);
+            if (type != "eraser") {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (arr.length != 0) {
+                    ctx.putImageData(arr[arr.length - 1], 0, 0, 0, 0, canvas.width, canvas.height);
                 }
             }
-            draw[type](x, y, x1, y1)
+            if (type == "poly") {
+                draw[type](x, y, x1, y1, polyLine)
+            } else {
+                draw[type](x, y, x1, y1)
+            }
         }
         document.onmouseup = (e) => {
             canvas.onmousemove = null;
@@ -73,15 +85,15 @@ function main(): void {
         }
     }
 }
-function setPage(num:number):void{
-    pageIndex+=num;
-    if(pageIndex<0){
-        pageIndex=0
+function setPage(num: number): void {
+    pageIndex += num;
+    if (pageIndex < 0) {
+        pageIndex = 0
     }
-    if(pageIndex>1){
-        pageIndex=1
+    if (pageIndex > 1) {
+        pageIndex = 1
     }
-    let bg:HTMLImageElement=<HTMLImageElement>document.getElementById("bg");
-    bg.src=`./../static/img/${pageIndex}.jpg`
+    let bg: HTMLImageElement = <HTMLImageElement>document.getElementById("bg");
+    bg.src = `./../static/img/${pageIndex}.jpg`
 }
 main()
