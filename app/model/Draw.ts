@@ -2,11 +2,19 @@
 export default class Draw {
     private ctx: CanvasRenderingContext2D;
     private _type: string;
+    private _fill: boolean;
     private _color: string;
     private _lineWidth: number;
+    private _polyLine: number;
     constructor(ctx: CanvasRenderingContext2D, type?: string) {
         this.type = type || 'stroke'
         this.ctx = ctx;
+    }
+    set polyLine(val: number) {
+        this._polyLine = val;
+    }
+    get polyLine(): number {
+        return this._polyLine
     }
     set lineWidth(val: number) {
         this._lineWidth = val;
@@ -26,19 +34,26 @@ export default class Draw {
     get type(): string {
         return this._type
     }
+    set fill(val: boolean) {
+        this._fill = val;
+    }
+    get fill(): boolean {
+        return this._fill
+    }
     init() {
         this.ctx.strokeStyle = this._color;
         this.ctx.fillStyle = this._color;
         this.ctx.lineWidth = this._lineWidth;
+        this.polyLine = this._polyLine;
     }
     rect(x, y, x1, y1) {
         this.init();
         this.ctx.beginPath();
         this.ctx.rect(x, y, x1 - x, y1 - y);
-        if (this._type == "stroke") {
-            this.ctx.stroke();
-        } else if (this._type == "fill") {
+        if (this._fill) {
             this.ctx.fill();
+        } else {
+            this.ctx.stroke();
         }
     }
     line(x, y, x1, y1) {
@@ -49,14 +64,16 @@ export default class Draw {
         this.ctx.stroke();
     }
     circle(x, y, x1, y1) {
+        console.log(x1);
+
         this.init();
-        var r = Math.sqrt(Math.pow(x - x1, 2) + Math.pow(y - y1, 2));
+        let r = Math.sqrt(Math.pow(x - x1, 2) + Math.pow(y - y1, 2));
         this.ctx.beginPath();
         this.ctx.arc(x, y, r, 0, 2 * Math.PI);
-        if (this._type == "stroke") {
-            this.ctx.stroke();
-        } else if (this._type == "fill") {
+        if (this._fill) {
             this.ctx.fill();
+        } else {
+            this.ctx.stroke();
         }
     }
     /**
@@ -67,18 +84,19 @@ export default class Draw {
      * @param y1 
      * @param n 
      */
-    poly(x, y, x1, y1, n = 3) {
+    poly(x, y, x1, y1) {
+        let n = this._polyLine;
         this.init();
-        var ctx = this.ctx;
-        var r = Math.sqrt(Math.pow(x - x1, 2) + Math.pow(y - y1, 2));;
+        let ctx = this.ctx;
+        let r = Math.sqrt(Math.pow(x - x1, 2) + Math.pow(y - y1, 2));;
         ctx.save();
         ctx.translate(x, y);
         ctx.rotate(Math.PI / 2);
-        var nx = r * Math.cos(Math.PI / n);
-        var ny = r * Math.sin(Math.PI / n);
+        let nx = r * Math.cos(Math.PI / n);
+        let ny = r * Math.sin(Math.PI / n);
         ctx.beginPath();
         ctx.moveTo(nx, ny);
-        for (var i = 0; i <= n; i++) {
+        for (let i = 0; i <= n; i++) {
             ctx.rotate(Math.PI * 2 / n);
             ctx.lineTo(nx, -ny);
         }

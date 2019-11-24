@@ -9,8 +9,10 @@
 </head>
 
 <body>
-    <img id="bg">
-    <canvas id="canvas" width="640" height="480"></canvas>
+    <div id="whiteboard">
+            <iframe id="ppt" src="http://vip.ow365.cn/?i=34&n=5&furl=http%3A%2F%2Fofficeweb365.com%2Fviewfile%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAHTML5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91.pptx&p=1" width="1186px" height="691px" frameborder="0"></iframe>
+        <canvas id="canvas" width="640" height="480"></canvas>
+    </div>
     <div class="util-box">
         <span class="label">画笔工具:</span>
         <button class="util" data-type="pen">铅笔</button>
@@ -38,14 +40,17 @@
     </div>
     <div class="line-width-box">
         <span class="label">线条粗细:</span>
-        <input id="lineWidth" type='range' min="1" value="1" />
+        <input id="lineWidth" type='range' min="1" max="20" value="1" />
         <span id="lineWidthValue">1</span>
     </div>
-    <!-- <div class="control-box">
-        <button>上一张</button>
+
+    <div class="control-box">
+        <button id="prePage">上一张</button>
+        <button id="preAnim">上一个动画</button>
         <button>重置</button>
-        <button>下一章</button>
-    </div> -->
+        <button id="nextAnim">下一个动画</button>
+        <button id="nextPage">下一章</button>
+    </div>
 </body>
 <style>
     body {
@@ -71,6 +76,11 @@
         /* justify-content: center; */
     }
 
+    #whiteboard {
+        width: 640px;
+        height: 480px;
+        overflow: hidden;
+    }
 
     .select-color-box {
         display: flex;
@@ -128,9 +138,9 @@
         border-left: none;
     }
 
-    #bg {
-        width: 640px;
-        height: 480px;
+    #ppt {
+        width: 100%;
+        height: calc(100% + 48px);
     }
 
     #canvas {
