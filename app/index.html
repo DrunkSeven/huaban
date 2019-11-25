@@ -9,47 +9,54 @@
 </head>
 
 <body>
-    <div id="whiteboard">
-            <iframe id="ppt" src="http://vip.ow365.cn/?i=34&n=5&furl=http%3A%2F%2Fofficeweb365.com%2Fviewfile%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAHTML5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91.pptx&p=1" width="1186px" height="691px" frameborder="0"></iframe>
-        <canvas id="canvas" width="640" height="480"></canvas>
-    </div>
-    <div class="util-box">
-        <span class="label">画笔工具:</span>
-        <button class="util" data-type="pen">铅笔</button>
-        <button class="util" data-type="line">直线</button>
-        <button class="util" data-type="circle">圈圈</button>
-        <button class="util" data-type="rect">矩形</button>
-        <button class="util" data-type="eraser">橡皮</button>
-        <div class="poly-box">
-            <button class="util" data-type="poly">正多边形</button>
-            <input type="number" id="polyLine" value="3" max="9" min="3" maxlength="2">
+    <div id="App">
+        <div id="whiteboard">
+            <!-- <iframe id="ppt"
+            src="http://vip.ow365.cn/?i=34&n=5&furl=http%3A%2F%2Fofficeweb365.com%2Fviewfile%2F%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAHTML5%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91.pptx&p=1"
+            width="1186px" height="691px" frameborder="0"></iframe> -->
+            <canvas id="canvas" width="640" height="480"></canvas>
         </div>
-        <button class="util" data-type="cancel">撤销</button>
-    </div>
-    <div class="color-box">
-        <div class="select-color-box">
-            <span class="label">当前颜色:</span>
-            <span id="selectColor" style="background: #000"></span>
+        <div id="ctrl-box">
+            <div class="util-box">
+                <span class="label">工具:</span>
+                <button class="util" data-type="pen">铅笔</button>
+                <button class="util" data-type="line">直线</button>
+                <button class="util" data-type="circle">圈圈</button>
+                <button class="util" data-type="rect">矩形</button>
+                <button class="util" data-type="eraser">橡皮</button>
+                <div class="poly-box">
+                    <button class="util" data-type="poly">正多边形</button>
+                    <input type="number" id="polyLine" value="3" max="9" min="3" maxlength="2">
+                </div>
+                <button class="util" data-type="cut">剪切</button>
+                <button class="util" data-type="cancel">撤销</button>
+            </div>
+            <div class="util-box">
+                <span class="label">线条:</span>
+                <button class="util" data-type="line">实线</button>
+                <button class="util" data-type="dash">虚线</button>
+                <span class="label">粗细:</span>
+                <input id="lineWidth" type='range' min="1" max="20" value="1" />
+                <span id="lineWidthValue">1</span>
+                <div class="select-color-box">
+                    <span class="label">颜色:</span>
+                    <span id="selectColor" style="background: #000"></span>
+                </div>
+                <span class="color" data-color="#000000"></span>
+                <span class="color" data-color="#FFFFFF"></span>
+                <span class="color" data-color="#FF0000"></span>
+                <span class="color" data-color="#0000FF"></span>
+                <span class="color" data-color="#FFFF00"></span>
+                <span class="color" data-color="#9AFF02"></span>
+            </div>
+            <div class="control-box">
+                <button id="prePage">上一张</button>
+                <!-- <button id="preAnim">上一个动画</button>
+            <button>重置</button>
+            <button id="nextAnim">下一个动画</button> -->
+                <button id="nextPage">下一张</button>
+            </div>
         </div>
-        <span class="color" data-color="#000000"></span>
-        <span class="color" data-color="#FFFFFF"></span>
-        <span class="color" data-color="#FF0000"></span>
-        <span class="color" data-color="#0000FF"></span>
-        <span class="color" data-color="#FFFF00"></span>
-        <span class="color" data-color="#9AFF02"></span>
-    </div>
-    <div class="line-width-box">
-        <span class="label">线条粗细:</span>
-        <input id="lineWidth" type='range' min="1" max="20" value="1" />
-        <span id="lineWidthValue">1</span>
-    </div>
-
-    <div class="control-box">
-        <button id="prePage">上一张</button>
-        <button id="preAnim">上一个动画</button>
-        <button>重置</button>
-        <button id="nextAnim">下一个动画</button>
-        <button id="nextPage">下一章</button>
     </div>
 </body>
 <style>
@@ -70,7 +77,6 @@
     .color-box,
     .util-box {
         padding: 5px 10px;
-        width: 640px;
         display: flex;
         align-items: center;
         /* justify-content: center; */
@@ -78,8 +84,12 @@
 
     #whiteboard {
         width: 640px;
-        height: 480px;
+        height: 370px;
         overflow: hidden;
+    }
+
+    #ctrl-box {
+        z-index: 1;
     }
 
     .select-color-box {
@@ -90,7 +100,7 @@
     }
 
     #selectColor,
-    .color-box .color {
+    .util-box .color {
         display: inline-block;
         width: 30px;
         height: 30px;

@@ -101,10 +101,10 @@ export default class Draw {
             ctx.lineTo(nx, -ny);
         }
         ctx.closePath();     //闭合路径否则首位衔接处会怪怪的
-        if (this._type == "stroke") {
-            this.ctx.stroke();
-        } else if (this._type == "fill") {
+        if (this._fill) {
             this.ctx.fill();
+        } else {
+            this.ctx.stroke();
         }
         // 
         ctx.restore();
@@ -125,14 +125,22 @@ export default class Draw {
         this.ctx.lineCap = "round";
         this.ctx.clearRect(x1 - width / 2, y1 - width / 2, width, width);
     }
-    // cut(x, y, x1, y1) {
-    //     this.init();
-    //     this.ctx.save();
-    //     this.ctx.setLineDash([4, 2]);
-    //     this.ctx.beginPath();
-    //     this.ctx.lineWidth = 1;
-    //     this.ctx.rect(x, y, x1 - x, y1 - y);
-    //     this.ctx.stroke();
-    //     this.ctx.restore();
-    // }
+    dash(x, y, x1, y1) {
+        this.init();
+        this.ctx.beginPath();
+        this.ctx.setLineDash([4, 2]);
+        this.ctx.moveTo(x, y);
+        this.ctx.lineTo(x1, y1);
+        this.ctx.stroke();
+    }
+    cut(x, y, x1, y1) {
+        this.init();
+        this.ctx.save();
+        this.ctx.setLineDash([4, 2]);
+        this.ctx.beginPath();
+        this.ctx.lineWidth = 1;
+        this.ctx.rect(x, y, x1 - x, y1 - y);
+        this.ctx.stroke();
+        this.ctx.restore();
+    }
 }
