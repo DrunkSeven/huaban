@@ -9,11 +9,16 @@ module.exports = {
                 exclude: /node_modules/,
                 use: { loader: 'ts-loader' }
             }, {
-                test: /\.css$/,
-                exclude: /node_modules/,
+                test: /\.(html)$/,
+                use: {
+                    loader: 'html-loader'
+                }
+            }, {
+                test: /\.scss$/,
                 use: [
                     { loader: "style-loader" },
                     { loader: "css-loader" },
+                    { loader: "sass-loader" }
                 ]
             }
         ]
