@@ -1,0 +1,16 @@
+<div class="player-box">
+    <img v-if="!state.isplay" @click="changeState(true)" class="btn" src="/static/img/icon_off@2x.png" />
+    <img v-else class="btn" @click="changeState(false)" src="/static/img/icon_on@2x.png" />
+    <div class="ctrl-box">
+        <div class="time-box">
+            <span>{{currentTimeStr}}</span>
+            <span>{{endTimeStr}}</span>
+        </div>
+        <div class="line-box">
+            <div class="line" ref="line"></div>
+            <span class="dot" ref="dot"></span>
+            <div class="opacityBar" ref="opacityBar" @mousedown="mousedown()" @mouseover="mouseover($event)"
+                @mouseup="mouseup($event)" @mousemove="mousemove($event)"></div>
+        </div>
+    </div>
+</div>

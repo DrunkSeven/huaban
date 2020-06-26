@@ -1,11 +1,7 @@
 const template = require("./index.html")
 import './index.scss'
 let WebHeader = {
-    data() {
-        return {
-            count: 0
-        }
-    },
-    template: template
+    template: template,
+    props: ['title'],
 }
 export default WebHeader;

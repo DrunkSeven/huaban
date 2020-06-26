@@ -10,9 +10,20 @@ module.exports = {
                 use: { loader: 'ts-loader' }
             }, {
                 test: /\.(html)$/,
-                use: {
-                    loader: 'html-loader'
-                }
+                use: [{
+                    loader: 'html-loader',
+                    options: {
+                        minimize: true
+                    }
+
+                }]
+            }, {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    }
+                ]
             }, {
                 test: /\.scss$/,
                 use: [

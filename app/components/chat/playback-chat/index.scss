@@ -1,0 +1,19 @@
+.playback-chat {
+    width: 100%;
+    overflow: hidden;
+    height: calc(100vh - 346px);
+
+    .tab {
+        text-align: center;
+        line-height: 45px;
+        border-bottom: 1px solid #eaeaea;
+        color: #48a1fc;
+        position: relative;
+    }
+
+    .none {
+        text-align: center;
+        padding-top: 20vh;
+        color: #999;
+    }
+}
