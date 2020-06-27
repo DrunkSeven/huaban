@@ -22,7 +22,7 @@ export default {
         }
     },
     mounted() {
-        this.recordUrl = "./static/ykt.mp4";
+        this.recordUrl = "./static/data/ykt.mp4";
         this.player = <HTMLVideoElement>document.getElementById('ykt-video');
         this.player.addEventListener("timeupdate", (v) => {
             this.state.currentTime = Math.floor(this.player.currentTime);

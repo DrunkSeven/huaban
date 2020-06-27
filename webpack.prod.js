@@ -24,7 +24,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
     }
 }(path.resolve(__dirname, 'dist'));
 module.exports = {
-    entry: "./app/main.ts",
+    entry: "./app/playback.ts",
     output: {
         publicPath: './',
     },

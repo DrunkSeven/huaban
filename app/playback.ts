@@ -1,4 +1,3 @@
-import io from "socket.io-client";
 import WebHeader from "./components/web-header";
 import WhiteBoard from './components/white-board'
 import PlaybackChat from './components/chat/playback-chat'
@@ -6,6 +5,7 @@ import PlaybackVideo from './components/video/playback-video'
 import PlaybackCtrl from './components/playback-ctrl'
 import state from './plugin/shareData'
 import PlaybackWBControler from './controler/PlaybackWB'
+import { isMobile } from './plugin/utils'
 import "./style/main.scss"
 Vue.prototype.state = state;
 new Vue({
@@ -21,7 +21,7 @@ new Vue({
         return {
             sharedState: this.state,
             title: "初一春季语文1星---兼容性专用3",
-            recordUrl: "/static/ykt.mp4",
+            isMobile: isMobile(),
             message: [],
             pptListIndex: 0,
             objListIndex: 0,
@@ -57,8 +57,6 @@ new Vue({
                     (pptObj.slide != this.state.pptObj.slide ||
                         pptObj.step != this.state.pptObj.step)
                 ) {
-                    console.log(pptObj.slide, this.state.pptObj.slide,
-                        pptObj.step, this.state.pptObj.step);
                     this.$refs.WhiteBoard.setPage(GOPAGE, pptObj.slide, pptObj.step);
                     wb.clear()
                 }

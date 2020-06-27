@@ -1,7 +1,6 @@
 /**
  * 全局状态
  */
-import { PPT } from './../model/PPT'
 export default {
     time: 0,
     isplay: false,//回放播放状态

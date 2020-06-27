@@ -2,6 +2,11 @@
     height: 100%;
     max-width: 380px;
     width: 380px;
+    border-left: 1px solid #eee;
+}
+
+.mobile .right-box {
+    width: 200px;
 }
 
 @media screen and (max-width: 750px) {

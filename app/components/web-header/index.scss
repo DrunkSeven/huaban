@@ -10,6 +10,12 @@
     padding: 0 10px;
 }
 
+.mobile {
+    .live-title {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 750px) {
     .live-title {
         display: none;

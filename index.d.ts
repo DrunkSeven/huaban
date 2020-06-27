@@ -7,6 +7,7 @@ declare let socket;
 declare let whiteboardData;
 declare let chatData;
 declare let wb;
+declare const VConsole;
 declare const ONMOUSEUP;
 declare const ONMOUSEDOWN;
 declare const ONMOUSEMOVE;

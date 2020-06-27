@@ -6,26 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="/static/js/vue.min.js"></script>
-    <script src="/static/js/whiteboard.js"></script>
-    <script src="/static/js/chat.js"></script>
+    <script src="/static/data/chat.js"></script>
+    <script src="/static/data/whiteboard.js"></script>
     <script src="/static/js/const.js"></script>
+    <script src="/static/vconsole.min.js"></script>
     <link rel="stylesheet" href="/static/css/playback.css">
     <title>白板</title>
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" :class="{'mobile':isMobile}">
         <web-header :title="title"></web-header>
         <div class="live-content">
             <white-board ref="WhiteBoard"></white-board>
             <div class="right-box">
-                <playback-video :recordUrl="recordUrl"></playback-video>
+                <playback-video></playback-video>
                 <playback-chat :message="message"></playback-chat>
             </div>
         </div>
         <playback-ctrl></playback-ctrl>
     </div>
-
+    <script>
+        new VConsole()
+    </script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 .playback-chat {
     width: 100%;
     overflow: hidden;
-    height: calc(100vh - 365px);
+    height: calc(100vh - 350px);
 
     #chat {
         height: 100%;
@@ -217,6 +217,29 @@
 
     .chat-entry-text {
         width: 100%;
+    }
+}
+
+.mobile {
+    .playback-chat {
+        height: calc(100vh - 166px);
+
+        .chat-entry {
+            padding: 5px;
+
+            .user-name {
+                font-size: 13px;
+            }
+
+            .chat-entry-word {
+                padding: 5px;
+                margin-top: 0;
+            }
+        }
+    }
+
+    .user-avatar {
+        display: none;
     }
 }
 

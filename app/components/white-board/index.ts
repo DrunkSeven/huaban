@@ -5,7 +5,7 @@ let WhiteBoard = {
     data() {
         return {
             windowSize: [],
-            pptUrl: "./static/ppt/"
+            pptUrl: "./static/data/ppt/"
         }
     },
     created() {

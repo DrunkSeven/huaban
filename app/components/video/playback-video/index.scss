@@ -1,6 +1,21 @@
 .video-js {
     height: 240px;
     width: 380px;
+    background: #000;
+}
+
+.mobile {
+    .video-js {
+        width: 200px;
+        height: 120px;
+    }
+}
+
+.mobile {
+    .video-js {
+        width: 200px;
+        height: 120px;
+    }
 }
 
 @media screen and (max-width: 750px) {
