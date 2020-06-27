@@ -5,7 +5,7 @@ let WhiteBoard = {
     data() {
         return {
             windowSize: [],
-            pptUrl: "/static/ppt/"
+            pptUrl: "./static/ppt/"
         }
     },
     created() {
@@ -49,8 +49,6 @@ let WhiteBoard = {
         },
         stepChange(value) {
             Object.assign(this.state.pptObj, value)
-            console.log(value);
-
         },
         pageChange(value) {
             Object.assign(this.state.pptObj, value)

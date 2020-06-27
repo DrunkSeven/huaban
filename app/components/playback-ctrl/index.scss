@@ -3,6 +3,7 @@
     position: relative;
     z-index: 1;
     padding: 20px;
+    align-items: center;
 
     .ctrl-box {
         flex: 1;
@@ -63,5 +64,11 @@
         border-radius: 100px;
         background: #3ca3f8;
         top: -8px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .player-box {
+        padding: 0 10px;
     }
 }

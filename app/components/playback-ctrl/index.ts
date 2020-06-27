@@ -1,9 +1,13 @@
 const template = require("./index.html")
+import icon_off from '../../assets/img/icon_off@2x.png';
+import icon_on from '../../assets/img/icon_on@2x.png';
 import './index.scss'
 export default {
     template: template,
     data() {
         return {
+            icon_off: icon_off,
+            icon_on: icon_on,
             sharedState: this.state,
             currentTime: 0,
             currentTimeStr: "0:00",
@@ -25,6 +29,9 @@ export default {
                 (this.state.currentTime / this.state.duration) * 100 + "%";
             this.$refs.line.style.width = this.$refs.dot.style.left;
         },
+    },
+    mounted() {
+        console.log()
     },
     methods: {
         changeState() {

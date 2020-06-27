@@ -9,3 +9,9 @@
     border-bottom: 1px solid #eee;
     padding: 0 10px;
 }
+
+@media screen and (max-width: 750px) {
+    .live-title {
+        display: none;
+    }
+}

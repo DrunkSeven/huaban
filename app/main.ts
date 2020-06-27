@@ -21,18 +21,21 @@ new Vue({
         return {
             sharedState: this.state,
             title: "初一春季语文1星---兼容性专用3",
-            recordUrl: "http://lrep.jze100.com/alive/2020/6/jzjyu374/04d8258dad4a15eb2bc5b8ade0c3da12_jzjyu374.m3u8",
+            recordUrl: "/static/ykt.mp4",
+            message: [],
             pptListIndex: 0,
             objListIndex: 0,
             whiteboardObj: {
                 pptList: []
             },
+            startTimestamp: 1592374211621,
             time: 0
         }
     },
     watch: {
         'sharedState.currentTime'(v, old) {
             this.time = v;
+            this.getMsg(v)
             let l = this.whiteboardObj.pptList.length;
             if (v - old != 1) {
                 this.pptListIndex = 0;
@@ -85,8 +88,6 @@ new Vue({
                 this.whiteboardObj[key].push(e)
             }
         }
-        console.log(this.whiteboardObj.pptList);
-
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('canvas')
         wb = new PlaybackWBControler(canvas)
     },
@@ -107,6 +108,17 @@ new Vue({
                 }
                 wb.tempList = tempList;
             }
+        },
+        getMsg(currentTime) {
+            let msg = [];
+            for (let i = 0; i < chatData.length; i++) {
+                if (parseInt(chatData[i].stamp) < this.startTimestamp + currentTime * 1000) {
+                    msg.push(chatData[i]);
+                } else {
+                    break;
+                }
+            }
+            this.message = msg.slice(-100);
         }
     }
 })

@@ -5,7 +5,8 @@ export default {
     data() {
         return {
             sharedState: this.state,
-            recordUrl: ""
+            recordUrl: "",
+            player: {}
         }
     },
     watch: {
@@ -16,26 +17,19 @@ export default {
         },
         'sharedState.currentTime'(v, old) {
             if (v - old != 1) {
-                this.player.currentTime(v);
+                this.player.currentTime = v
             }
         }
     },
     mounted() {
-        this.recordUrl = "http://lrep.jze100.com/alive/2020/6/jzjyu374/04d8258dad4a15eb2bc5b8ade0c3da12_jzjyu374.m3u8"
-        setTimeout(() => {
-            let that = this;
-            this.player = videojs("example-video", {}, function onPlayerReady() {
-                this.error = msg => {
-                    console.log(msg);
-                };
-                this.on("timeupdate", function (v) {
-                    that.state.currentTime = Math.floor(this.cache_.currentTime);
+        this.recordUrl = "./static/ykt.mp4";
+        this.player = <HTMLVideoElement>document.getElementById('ykt-video');
+        this.player.addEventListener("timeupdate", (v) => {
+            this.state.currentTime = Math.floor(this.player.currentTime);
 
-                });
-                this.on("durationchange", function () {
-                    that.state.duration = this.cache_.duration;
-                });
-            });
-        }, 100);
+        });
+        this.player.addEventListener("durationchange", (v) => {
+            this.state.duration = this.player.duration;
+        });
     }
 }

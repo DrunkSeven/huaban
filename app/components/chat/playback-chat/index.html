@@ -3,7 +3,23 @@
     <div class="chat-container">
         <div class="second-part">
             <div class="second-part-content">
-                <div class="none"><img src="/static/img/chat.png" style="margin-bottom: 10px;">
+                <div v-if="message.length" class="chat-contain messages">
+                    <div class="chat-entry" v-for="(item,index2) in message" :key="index2">
+                        <div class="user-avatar">
+                            <img :src="item.avatar ||defaultImg" class="chat-entry-avatar" />
+                        </div>
+                        <div class="chat-entry-text">
+                            <p class="chat-entry-name">
+                                <span class="user-name"
+                                    :class="{'blue':item.role === 'teacher' || item.role === 'tutor'}">{{item.realname}}</span>
+                                <span class="user-time">{{item.stamp | formateTime}}</span>
+                            </p>
+                            <span class="chat-entry-word">{{item.message}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div v-else class="none">
+                    <!-- <img src="/static/img/chat.png" style="margin-bottom: 10px;"> -->
                     <p>还没有人聊天哦</p>
                 </div>
             </div>

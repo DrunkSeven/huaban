@@ -1,6 +1,6 @@
 <div class="player-box">
-    <img v-if="!state.isplay" @click="changeState(true)" class="btn" src="/static/img/icon_off@2x.png" />
-    <img v-else class="btn" @click="changeState(false)" src="/static/img/icon_on@2x.png" />
+    <img v-if="!state.isplay" @click="changeState(true)" class="btn" :src="icon_off" />
+    <img v-else class="btn" @click="changeState(false)" :src="icon_on" />
     <div class="ctrl-box">
         <div class="time-box">
             <span>{{currentTimeStr}}</span>
